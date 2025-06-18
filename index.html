@@ -397,10 +397,10 @@
 <section id="resume" class="section" data-aos="fade-down">
   <h2>Resume</h2>
   <div class="certifications">
-    <a href="https://github.com/KhushiTiwari9/portfolio/raw/main/docs/Khushi_Resume.pdf" download>
+    <a href="https://github.com/KhushiTiwari9/Personal-Portfolio/blob/main/Khushi_Tiwari_Resume1.docx" download>
       <button class="btn">⬇️ Download Resume</button>
     </a>
-    <a href="https://github.com/KhushiTiwari9/portfolio/raw/main/docs/Cover_Letter.pdf" download>
+    <a href="https://github.com/KhushiTiwari9/Personal-Portfolio/blob/main/CoverLetter.docx" download>
       <button class="btn">⬇️ Download Cover Letter</button>
     </a>
   </div>
@@ -452,17 +452,36 @@ const skills = ['Python', 'Java', 'C++', 'C', 'Advance Java', 'HTML', 'PHP', 'C#
       {name: 'Image Encryption', lang: 'Python', desc: 'A cybersecurity project using image encryption and decryption.', link: 'https://github.com/KhushiTiwari9/Image_Enc'},
       {name: 'Retail Sales', lang: 'Tableau', desc: 'A Tableau project for analyzing retail sales data.', link: 'https://github.com/KhushiTiwari9/Retail-Sales-Tablaeu-Project'},
       {name: 'iPhone Sales', lang: 'Power BI', desc: 'A Power BI project for analyzing iPhone sales.', link: 'https://github.com/KhushiTiwari9/Iphone_Sales'},
-      {name: 'Personal-Portfolio', lang: 'HTML, CSS, JS', desc: 'My HTML, CSS, and JS-based portfolio with animations, project links, and contact form..', link: '.....'}
+      {name: 'Personal-Portfolio', lang: 'HTML, CSS, JS', desc: 'My HTML, CSS, and JS-based portfolio with animations, project links, and contact form..', link: 'https://github.com/KhushiTiwari9/Personal-Portfolio'}
     ];
 
     const certifications = [
-      {name: 'CyberSecurity', img: 'https://raw.githubusercontent.com/KhushiTiwari9/portfolio/main/images/CyberSecurity.jpg'},
-      {name: 'Python', img: 'https://raw.githubusercontent.com/KhushiTiwari9/portfolio/main/images/Python.jpg'},
-      {name: 'Azure', img: 'https://raw.githubusercontent.com/KhushiTiwari9/portfolio/main/images/Azure.jpg'},
-      {name: 'Machine Learning', img: ''},
-      {name: 'Tableau', img: ''},
-      {name: 'Power BI', img: ''}
-    ];
+  {
+    name: 'CyberSecurity',
+    img: 'https://raw.githubusercontent.com/KhushiTiwari9/Personal-Portfolio/main/CyberSecurity%20Certificate.jpeg'
+  },
+  {
+    name: 'Python',
+    img: 'https://raw.githubusercontent.com/KhushiTiwari9/Personal-Portfolio/main/Python%20Certificate.jpeg'
+  },
+  {
+    name: 'Azure',
+    img: 'https://raw.githubusercontent.com/KhushiTiwari9/Personal-Portfolio/main/Azure%20Certificate.jpg'
+  },
+  {
+    name: 'Machine Learning',
+    img: ''
+  },
+  {
+    name: 'Tableau',
+    img: ''
+  },
+  {
+    name: 'Power BI',
+    img: ''
+  }
+];
+
 
     let showSkills = false, showProjects = false, showCerts = false;
 
@@ -496,18 +515,35 @@ const skills = ['Python', 'Java', 'C++', 'C', 'Advance Java', 'HTML', 'PHP', 'C#
       container.innerHTML = list.map(c => `
         <div>
           <button onclick="showCertImage('${c.name}')">${c.name}</button>
-          ${c.img ? `<img id="${c.name}" src="${c.img}" alt="${c.name} Certificate"/>` : ''}
+          ${c.img ? `<img id="${c.name}" class="cert-img" src="${c.img}" alt="${c.name} Certificate"/>` : ''}
         </div>`).join('');
       btn.innerText = showCerts ? 'Show More' : 'Show Less';
       showCerts = !showCerts;
     }
 
-    function showCertImage(id) {
-      const img = document.getElementById(id);
-      if (img && img.src && img.src.includes("githubusercontent")) {
-        img.style.display = img.style.display === 'block' ? 'none' : 'block';
-      }
-    }
+    let currentlyOpenCertId = null;
+
+function showCertImage(id) {
+  const img = document.getElementById(id);
+
+  if (!img) return;
+
+  // Hide previously open image if clicking on a new one
+  if (currentlyOpenCertId && currentlyOpenCertId !== id) {
+    const prevImg = document.getElementById(currentlyOpenCertId);
+    if (prevImg) prevImg.style.display = 'none';
+  }
+
+  // Toggle current image
+  if (img.style.display === 'block') {
+    img.style.display = 'none';
+    currentlyOpenCertId = null;
+  } else {
+    img.style.display = 'block';
+    currentlyOpenCertId = id;
+  }
+}
+
 
     function toggleMenu() {
       document.getElementById("navLinks").classList.toggle("show");
@@ -598,6 +634,17 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
   }).catch(() => {
     alert("❌ Network error. Please check your internet.");
   });
+});
+document.addEventListener("click", function (e) {
+  if (
+    currentlyOpenCertId &&
+    !e.target.classList.contains("cert-img") &&
+    !e.target.tagName.includes("BUTTON")
+  ) {
+    const openImg = document.getElementById(currentlyOpenCertId);
+    if (openImg) openImg.style.display = "none";
+    currentlyOpenCertId = null;
+  }
 });
 
 
