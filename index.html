@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Khushi Tiwari | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg-color: #72B0AB;
+      --btn-color: #355E58;
+      --title-color: #053229;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-color) url('https://www.transparenttextures.com/patterns/cubes.png');
+      color: #fff;
+      padding: 40px;
+    }
+
+    /* Loader */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #72B0AB;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .loader-msg {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      color: #ffffff;
+      opacity: 0.9;
+    }
+
+    .progress-bar {
+      width: 250px;
+      height: 10px;
+      background-color: #d8f1ef;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background-color: #355E58;
+      animation: fillBar 3s forwards;
+      border-radius: 20px;
+    }
+
+    @keyframes fillBar {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .hamburger {
+      font-size: 2rem;
+      color: var(--title-color);
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      z-index: 1000;
+    }
+
+    .nav-links.show {
+      display: flex;
+    }
+
+    .nav-links li {
+      list-style: none;
+      margin: 10px 0;
+    }
+
+    .nav-links li a {
+      color: var(--btn-color);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--btn-color);
+    }
+
+    h2 {
+      margin-top: 50px;
+      font-size: 2rem;
+      color: var(--title-color);
+      border-left: 5px solid var(--btn-color);
+      padding-left: 15px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .intro {
+      font-size: 1.1rem;
+      color: white;
+      max-width: 850px;
+      margin: 10px auto;
+      line-height: 1.6;
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e0f2f1;
+      color: var(--title-color);
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin: 8px 8px 0 0;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      background: var(--btn-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+
+    .project {
+      background: #ffffff;
+      color: #333;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: 20px 0;
+    }
+
+    .project a {
+      text-decoration: none;
+      color: var(--title-color);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .certifications button {
+      margin: 8px;
+      padding: 10px 16px;
+      background: white;
+      color: var(--title-color);
+      border: 2px solid var(--btn-color);
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .certifications img {
+      display: none;
+      width: 100%;
+      max-width: 600px;
+      margin: 15px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .inline-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+
+    .inline-links a {
+      color: var(--title-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .inline-links a:hover {
+      text-decoration: underline;
+    }
+
+    .inline-links i {
+      margin-right: 8px;
+      font-size: 1.1rem;
+      color: var(--btn-color);
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 1rem;
+      color: #f0f0f0;
+    }
+
+    footer span {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+    .toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #355E58;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 9999;
+}
+.toast.show {
+  opacity: 1;
+}
+/* Popup Form Styling */
+.popup-form {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.popup-form .form-box {
+  background: #fff;
+  color: #333;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+}
+.popup-form input, .popup-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.popup-form textarea {
+  resize: vertical;
+  height: 100px;
+}
+.popup-form .btn {
+  background: var(--btn-color);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.popup-form .close {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  font-size: 1.5rem;
+  color: var(--btn-color);
+  cursor: pointer;
+}
+
+/* Success Toast */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #355E58;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 99999;
+}
+.toast.show {
+  opacity: 1;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-content">
+      <p class="loader-msg">Please wait, getting things ready!...</p>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT: starts hidden, shown after 5s -->
+  <div id="main-content" style="display: none;">
+
+    <!-- Continue with navbar, header, skills, etc. -->
+    <!-- I’ll paste remaining full content and JS in next message to keep it clean -->
+    <nav class="navbar">
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">🏠 Home</a></li>
+        <li><a href="#skills">💻 Skills</a></li>
+        <li><a href="#projects">🧩 Projects</a></li>
+        <li><a href="#certifications">🎓 Certifications</a></li>
+        <li><a href="#resume">📂 Resume</a></li>
+        <li><a href="#contact">✉️ Contact</a></li>
+      </ul>
+    </nav>
+
+    <header id="home" data-aos="fade-down">
+      <h1>Khushi Tiwari</h1>
+      <h2>Tech Explorer</h2>
+      <p class="intro">
+        I am a tech enthusiast with a strong interest in building efficient, real-world solutions. As a fresher, I focus on continuous learning, logical thinking, and applying my skills to practical challenges. I aim to contribute meaningfully while growing in a dynamic environment.
+      </p>
+    </header>
+
+    <section id="skills" class="section" data-aos="zoom-in">
+      <h2>Skills</h2>
+      <div id="skillsContent"></div>
+      <button class="btn" onclick="toggleSkills()" id="skillsBtn">Show More</button>
+    </section>
+
+    <section id="projects" class="section" data-aos="zoom-in">
+      <h2>Projects</h2>
+      <div id="projectsContent"></div>
+      <button class="btn" onclick="toggleProjects()" id="projectsBtn">Show More</button>
+    </section>
+
+    <section id="certifications" class="section" data-aos="zoom-in">
+      <h2>Certifications</h2>
+      <div class="certifications" id="certificationsContent"></div>
+      <button class="btn" onclick="toggleCertifications()" id="certBtn">Show More</button>
+    </section>
+
+    <!-- Replace the "View Resume" & "View Cover Letter" section with this -->
+<section id="resume" class="section" data-aos="fade-down">
+  <h2>Resume</h2>
+  <div class="certifications">
+    <a href="https://github.com/KhushiTiwari9/portfolio/raw/main/docs/Khushi_Resume.pdf" download>
+      <button class="btn">⬇️ Download Resume</button>
+    </a>
+    <a href="https://github.com/KhushiTiwari9/portfolio/raw/main/docs/Cover_Letter.pdf" download>
+      <button class="btn">⬇️ Download Cover Letter</button>
+    </a>
+  </div>
+</section>
+
+
+
+   <section id="contact" class="section">
+  <div class="inline-links">
+    <a href="#" onclick="openForm()"><i class="fas fa-envelope"></i> Email</a>
+    <a href="https://www.linkedin.com/in/khushi-tiwari-152335321/" target="_blank">
+      <i class="fab fa-linkedin"></i> LinkedIn
+    </a>
+    <a href="https://github.com/KhushiTiwari9" target="_blank">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+  </div>
+</section>
+<div id="popupForm" class="popup-form">
+  <div class="form-box">
+    <span class="close" onclick="closeForm()">×</span>
+    <form id="contactForm">
+      <h3 style="color:#053229;">Send a Message</h3>
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send</button>
+    </form>
+  </div>
+</div>
+
+<!-- ✅ Success Toast -->
+<div id="successToast" class="toast">✅ Message sent successfully!</div>
+
+
+
+    <footer>
+      <span>© 2025 KhushiTiwari, Inc. All rights reserved.</span>
+    </footer>
+  </div> <!-- ✅ end of #main-content -->
+
+  <!-- JS Scripts -->
+  <script>
+const skills = ['Python', 'Java', 'C++', 'C', 'Advance Java', 'HTML', 'PHP', 'C#.NET', 'PANDAS', 'NumPy', 'SQL', 'DBMS', 'RDBMS', 'Data Structure', 'MS Excel', 'Power BI', 'Tableau', 'Android SDK', 'Azure', 'CSS', 'JavaScript'];
+
+    const projects = [
+      {name: 'Online Book Store', lang: 'PHP', desc: 'Developed a PHP-based website with features like user authentication, book search, cart management, and payment integration.', link: 'https://github.com/KhushiTiwari9/Pharmacy-Management-System'},
+      {name: 'Pharmacy Management System', lang: 'C#', desc: 'Developed a desktop app to manage inventory, customer records, and billing.', link: 'https://github.com/KhushiTiwari9/Online-Book-Store'},
+      {name: 'Image Encryption', lang: 'Python', desc: 'A cybersecurity project using image encryption and decryption.', link: 'https://github.com/KhushiTiwari9/Image_Enc'},
+      {name: 'Retail Sales', lang: 'Tableau', desc: 'A Tableau project for analyzing retail sales data.', link: 'https://github.com/KhushiTiwari9/Retail-Sales-Tablaeu-Project'},
+      {name: 'iPhone Sales', lang: 'Power BI', desc: 'A Power BI project for analyzing iPhone sales.', link: 'https://github.com/KhushiTiwari9/Iphone_Sales'},
+      {name: 'Personal-Portfolio', lang: 'HTML, CSS, JS', desc: 'My HTML, CSS, and JS-based portfolio with animations, project links, and contact form..', link: '.....'}
+    ];
+
+    const certifications = [
+      {name: 'CyberSecurity', img: 'https://raw.githubusercontent.com/KhushiTiwari9/portfolio/main/images/CyberSecurity.jpg'},
+      {name: 'Python', img: 'https://raw.githubusercontent.com/KhushiTiwari9/portfolio/main/images/Python.jpg'},
+      {name: 'Azure', img: 'https://raw.githubusercontent.com/KhushiTiwari9/portfolio/main/images/Azure.jpg'},
+      {name: 'Machine Learning', img: ''},
+      {name: 'Tableau', img: ''},
+      {name: 'Power BI', img: ''}
+    ];
+
+    let showSkills = false, showProjects = false, showCerts = false;
+
+    function toggleSkills() {
+      const container = document.getElementById('skillsContent');
+      const btn = document.getElementById('skillsBtn');
+      const list = showSkills ? skills.slice(0, 3) : skills;
+      container.innerHTML = list.map(skill => `<span class="tag">${skill}</span>`).join('');
+      btn.innerText = showSkills ? 'Show More' : 'Show Less';
+      showSkills = !showSkills;
+    }
+
+    function toggleProjects() {
+      const container = document.getElementById('projectsContent');
+      const btn = document.getElementById('projectsBtn');
+      const list = showProjects ? projects.slice(0, 2) : projects;
+      container.innerHTML = list.map(p => `
+        <div class="project">
+          <a href="${p.link}" target="_blank">${p.name}</a>
+          <p>${p.desc}</p>
+          <small style="color:#666">Language: ${p.lang}</small>
+        </div>`).join('');
+      btn.innerText = showProjects ? 'Show More' : 'Show Less';
+      showProjects = !showProjects;
+    }
+
+    function toggleCertifications() {
+      const container = document.getElementById('certificationsContent');
+      const btn = document.getElementById('certBtn');
+      const list = showCerts ? certifications.slice(0, 3) : certifications;
+      container.innerHTML = list.map(c => `
+        <div>
+          <button onclick="showCertImage('${c.name}')">${c.name}</button>
+          ${c.img ? `<img id="${c.name}" src="${c.img}" alt="${c.name} Certificate"/>` : ''}
+        </div>`).join('');
+      btn.innerText = showCerts ? 'Show More' : 'Show Less';
+      showCerts = !showCerts;
+    }
+
+    function showCertImage(id) {
+      const img = document.getElementById(id);
+      if (img && img.src && img.src.includes("githubusercontent")) {
+        img.style.display = img.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("show");
+    }
+
+    document.addEventListener("click", function (e) {
+      const nav = document.getElementById("navLinks");
+      const hamburger = document.querySelector(".hamburger");
+      if (nav.classList.contains("show") && !nav.contains(e.target) && !hamburger.contains(e.target)) {
+        nav.classList.remove("show");
+      }
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        document.getElementById("navLinks").classList.remove("show");
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById('skillsContent').innerHTML = skills.slice(0, 3).map(skill => `<span class="tag">${skill}</span>`).join('');
+      document.getElementById('projectsContent').innerHTML = projects.slice(0, 2).map(p => `
+        <div class="project">
+          <a href="${p.link}" target="_blank">${p.name}</a>
+          <p>${p.desc}</p>
+          <small style="color:#666">Language: ${p.lang}</small>
+        </div>`).join('');
+      document.getElementById('certificationsContent').innerHTML = certifications.slice(0, 3).map(c => `
+        <div>
+          <button onclick="showCertImage('${c.name}')">${c.name}</button>
+          ${c.img ? `<img id="${c.name}" src="${c.img}" alt="${c.name} Certificate"/>` : ''}
+        </div>`).join('');
+    });
+
+    // LOADER
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+      }, 5000);
+    });
+    function showToast(message = "✉️ Opening Gmail... please wait!") {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000); // Show for 3 seconds
+}
+function openForm() {
+  document.getElementById("popupForm").style.display = "flex";
+}
+
+function closeForm() {
+  document.getElementById("popupForm").style.display = "none";
+  document.getElementById("contactForm").reset();
+}
+
+function showSuccessToast() {
+  const toast = document.getElementById('successToast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Close on outside click
+window.addEventListener("click", function(e) {
+  const popup = document.getElementById("popupForm");
+  if (e.target === popup) closeForm();
+});
+
+// AJAX form submit
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+
+  fetch("https://formspree.io/f/mkgbzqgn", {
+    method: "POST",
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(response => {
+    if (response.ok) {
+      closeForm();
+      showSuccessToast();
+    } else {
+      alert("❌ Failed to send. Please try again.");
+    }
+  }).catch(() => {
+    alert("❌ Network error. Please check your internet.");
+  });
+});
+
+
+
+
+  </script>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
+  <!-- Toast Message -->
+<div id="toast" class="toast">✉️ Opening Gmail... please wait!</div>
+
+
+
+</body>
+</html>
